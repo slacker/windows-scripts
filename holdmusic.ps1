@@ -3,7 +3,7 @@
     Prepares new hold music files and copies them to a target directory for use.
 .DESCRIPTION
     This script will take a directory of wav files and properly rename them to
-	fit the needs of the I3 phone system.  It will make copies of the files it
+	fit the needs of the I3 phone system.  It will make copies of the files if
 	there are less than the necessary nine.  The files are then copied to the
 	target directory for use and also inside a folder in the target directory
 	for archive purposes.
@@ -74,7 +74,6 @@ if ( ! $noDefault)
 {
     Rename-Item ($source + [string]$files[8]) ($source + "SystemDefaultAudioOnHold.wav")
 }
-
 
 # Copy to target
 if ($target)
