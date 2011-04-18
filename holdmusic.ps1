@@ -11,7 +11,9 @@
     File Name : holdmusic.ps1
     Author    : Daniel Robertson <dan@540tech.com>
 .EXAMPLE
-    ./holdmusic.ps1 "C:\Users\djr\desktop\Hold Music 2011-04-18" "\\bowic-a\d$\i3\ic\resources"
+    .\holdmusic.ps1 "C:\Users\djr\desktop\Hold Music 2011-04-18" "\\bowic-a\d$\i3\ic\resources"
+.EXAMPLE
+    D:\windows-scripts\holdmusic.ps1 -target ".\output" -noArchive
 .PARAMETER source
     Source directory containing the new files
 .PARAMETER target
@@ -31,7 +33,7 @@ if ( ! $source.EndsWith("\"))
 
 try
 {
-    $files = Get-ChildItem $source -filter "*.wav" -ErrorAction stop
+    $files = Get-ChildItem $source -filter "*.wav" -ErrorAction stop | Sort-Object -property CreationTime
 }
 catch [system.exception]
 {
@@ -60,10 +62,10 @@ if ($noDefault)
 for ($i=0; $i -lt $diff; $i++)
 {
     Copy-Item ($source + [string]$files[$i]) ($source + $i + ".wav")
-}
 
-# Update the list of files
-$files = Get-ChildItem $source -filter "*.wav" | Sort-Object -property CreationTime
+    # Update the list of files
+    $files = Get-ChildItem $source -filter "*.wav" | Sort-Object -property CreationTime
+}
 
 # Rename files
 for ($i=0; $i -le 7; $i++)
