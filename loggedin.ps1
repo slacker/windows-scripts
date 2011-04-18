@@ -80,7 +80,7 @@ if (($list[0] -eq "domain") -or ($list[0] -eq "ou"))
     }
     catch [system.exception]
     {
-        "ERROR: " + $_.exception.message
+        Write-Warning $_.exception.message
         exit
     }
 }
